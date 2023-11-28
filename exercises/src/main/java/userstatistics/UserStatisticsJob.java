@@ -78,7 +78,7 @@ public class UserStatisticsJob {
                 .map(UserStatistics::new)
                 .keyBy(UserStatistics::getEmailAddress)
                 .window(TumblingEventTimeWindows.of(Time.minutes(1)))
-                .reduce(UserStatistics::merge);
+                .reduce(UserStatistics::merge, new ProcessUserStatisticsFunction());
     }
 }
 
