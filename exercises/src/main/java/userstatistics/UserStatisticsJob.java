@@ -48,7 +48,7 @@ public class UserStatisticsJob {
                 .build();
 
         DataStreamSource<FlightData> flightDataStream = env
-                .fromSource(flightDataSource, WatermarkStrategy.noWatermarks(), "flightdata_source");
+                .fromSource(flightDataSource, WatermarkStrategy.forMonotonousTimestamps(), "flightdata_source");
 
         KafkaRecordSerializationSchema<UserStatistics> statisticsSerializer = KafkaRecordSerializationSchema.<UserStatistics>builder()
                 .setTopic("userstatistics")

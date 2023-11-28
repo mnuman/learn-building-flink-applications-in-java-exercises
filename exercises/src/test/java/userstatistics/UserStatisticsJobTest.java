@@ -125,7 +125,7 @@ class UserStatisticsJobTest {
         env.executeAsync();
 
         UserStatistics expected1 = new UserStatistics(flight1).merge(new UserStatistics(flight2));
-        UserStatistics expected2 = new UserStatistics(flight3);
+        UserStatistics expected2 = expected1.merge(new UserStatistics(flight3));
 
         assertContains(collector, Arrays.asList(expected1, expected2));
     }
